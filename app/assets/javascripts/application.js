@@ -20,12 +20,30 @@
 
 $('.workouts.show').ready(function() {
 
+// Sets up Audio
+	var audioElement = document.createElement('audio');
+    audioElement.setAttribute('src', 'http://www.flashkit.com/imagesvr_ce/flashkit/soundfx/People/Whistles/Referee_-Fawzi_Ra-7997/Referee_-Fawzi_Ra-7997_hifi.mp3');
+    audioElement.setAttribute('autoplay', 'autoplay');
+    //audioElement.load()
+
+    $.get();
+
+    audioElement.addEventListener("load", function() {
+        audioElement.play();
+    }, true);
+
+// Sets up Timer
 	var hasTimer = false;
 	// Init timer start
 	$('.start-timer-btn').on('click', function() {
 		hasTimer = true;
 		$('.timer').timer({
-			editable: true
+			editable: true,
+			duration: '60s',
+		    callback: function() {
+		    	audioElement.play();
+		        alert('Time up!');
+		    }
         });
 		$(this).addClass('hidden');
 		$('.pause-timer-btn, .remove-timer-btn').removeClass('hidden');
